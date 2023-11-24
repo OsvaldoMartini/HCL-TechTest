@@ -1,0 +1,40 @@
+server:
+  port: 8090
+  max-http-header-size: 1MB
+  servlet:
+    session:
+      timeout: 240m
+      cookie:
+        max-age: 10h
+
+logging:
+  level:
+    root: INFO
+    '[org.hibernate.SQL]': DEBUG
+    '[org.springframework.jdbc.datasource.init.ScriptUtils]': DEBUG
+    '[com.db.dataplatform.techtest.server]': DEBUG
+    '[com.db.dataplatform.techtest.client]': DEBUG
+    '[org.springframework.security]': INFO
+    '[com.db.dataplatform.techtest.client.component.impl]': INFO # Various non-query client logging
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: "off"
+  jackson.serialization.WRITE_DATES_AS_TIMESTAMPS: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+    database-platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    show-sql: true
+
+client:
+  url: http://localhost:8090/dataserver
+  bearerToken: changeit
